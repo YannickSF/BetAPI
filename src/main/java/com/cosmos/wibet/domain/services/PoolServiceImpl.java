@@ -1,15 +1,14 @@
-package com.cosmos.wibet.services.domain;
+package com.cosmos.wibet.domain.services;
 
+import com.cosmos.wibet.domain.model.enums.ResultEnum;
+import com.cosmos.wibet.domain.model.enums.StateEnum;
 import com.cosmos.wibet.persistence.entity.PoolEntity;
 import com.cosmos.wibet.persistence.repository.PoolRepository;
-import com.cosmos.wibet.services.model.Pool;
-import com.cosmos.wibet.services.rest.model.PoolRest;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.cosmos.wibet.domain.model.Pool;
+import com.cosmos.wibet.rest.model.PoolRest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -22,31 +21,27 @@ public class PoolServiceImpl implements PoolService {
 
 
     public Pool poolEntityToPool(PoolEntity poolEntity) {
-        final GsonBuilder builder = new GsonBuilder();
-        final Gson gson = builder.create();
         final Pool pool = new Pool();
 
         pool.setId(UUID.fromString(poolEntity.getId()));
         pool.setTitle(poolEntity.getTitle());
         pool.setCote(poolEntity.getCote());
-        pool.setBets(gson.fromJson(poolEntity.getBets(), ArrayList.class));
-        pool.setResult(poolEntity.getResult());
-        pool.setState(poolEntity.getState());
+        pool.setResult(ResultEnum.fromCode(poolEntity.getResult()));
+        pool.setState(StateEnum.fromCode(poolEntity.getState()));
+        pool.setMatchId(UUID.fromString(poolEntity.getMatchId()));
 
         return pool;
     }
 
     public PoolEntity poolToPoolEntity(Pool pool) {
-        final GsonBuilder builder = new GsonBuilder();
-        final Gson gson = builder.create();
         final PoolEntity poolEntity = new PoolEntity();
 
         poolEntity.setId(pool.getId().toString());
         poolEntity.setTitle(pool.getTitle());
         poolEntity.setCote(pool.getCote());
-        poolEntity.setBets(gson.toJson(pool.getBets()));
-        poolEntity.setResult(pool.getResult());
-        poolEntity.setState(pool.getState());
+        poolEntity.setResult(pool.getResult().toString());
+        poolEntity.setState(pool.getState().toString());
+        poolEntity.setMatchId(pool.getMatchId().toString());
 
         return poolEntity;
     }
@@ -57,9 +52,9 @@ public class PoolServiceImpl implements PoolService {
         newPool.setId(UUID.randomUUID());
         newPool.setTitle(createPool.getTitle());
         newPool.setCote(createPool.getCote());
-        newPool.setResult("NONE");
-        newPool.setState("EN_COUR");
-        newPool.setBets(new ArrayList<>());
+        newPool.setResult(ResultEnum.NONE);
+        newPool.setState(StateEnum.A_VENIR);
+        newPool.setMatchId(UUID.fromString(createPool.getMatchId()));
 
         return poolEntityToPool(poolRepository.save(poolToPoolEntity(newPool)));
     }
@@ -69,6 +64,13 @@ public class PoolServiceImpl implements PoolService {
         return poolEntityToPool(poolRepository.findById(poolId).get());
     }
 
+    public List<Pool> findPoolByMatchId(String matchId){
+        return poolRepository.findByMatchId(matchId)
+                .stream()
+                .map(this::poolEntityToPool)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public List<Pool> getPools() {
         List<PoolEntity> poolEntities = (List<PoolEntity>) poolRepository.findAll();
@@ -76,12 +78,26 @@ public class PoolServiceImpl implements PoolService {
     }
 
     @Override
-    public Pool updatePool(PoolRest updatePool) {
+    public Pool updatePool(String poolId, PoolRest updatePool) {
         return null;
     }
 
     @Override
     public Pool deletePool(String UUID) {
         return null;
+    }
+
+    @Override
+    public Pool closePool(String poolId) {
+        Pool find = poolRepository.findById(poolId).map(this::poolEntityToPool).get();
+        find.setState(StateEnum.CLOT);
+        return poolEntityToPool(poolRepository.save(poolToPoolEntity(find)));
+    }
+
+    @Override
+    public Pool endPool(String poolId) {
+        Pool find = poolRepository.findById(poolId).map(this::poolEntityToPool).get();
+        find.setState(StateEnum.TERMINE);
+        return poolEntityToPool(poolRepository.save(poolToPoolEntity(find)));
     }
 }

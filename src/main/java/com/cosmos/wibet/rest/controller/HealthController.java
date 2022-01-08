@@ -1,4 +1,4 @@
-package com.cosmos.wibet.services.rest.controller;
+package com.cosmos.wibet.rest.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

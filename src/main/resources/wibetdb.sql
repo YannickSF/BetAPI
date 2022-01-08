@@ -16,8 +16,19 @@ title varchar(200),
 date_creation varchar(100),
 play_date varchar(100),
 end_date varchar(100),
-teams longtext,
-bets longtext,
+team_one varchar(100),
+team_two varchar(100),
+state varchar(10),
+primary key(id)
+);
+
+CREATE Table pool(
+id varchar(40),
+title varchar(100),
+cote integer(10),
+`result` varchar(30),
+state varchar(10),
+match_id varchar(40),
 primary key(id)
 );
 
@@ -29,14 +40,3 @@ value integer,
 pool_id varchar(40),
 primary key(id)
 );
-
-CREATE Table pool(
-id varchar(40),
-title varchar(100),
-cote integer(10),
-bets longtext,
-`result` varchar(30),
-state varchar(10),
-primary key(id)
-);
-

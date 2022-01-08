@@ -1,4 +1,4 @@
-package com.cosmos.wibet.services.model;
+package com.cosmos.wibet.domain.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

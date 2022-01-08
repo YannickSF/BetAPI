@@ -1,10 +1,10 @@
-package com.cosmos.wibet.services.domain;
+package com.cosmos.wibet.domain.services;
 
 import com.cosmos.wibet.persistence.entity.UserEntity;
 import com.cosmos.wibet.persistence.repository.UserRepository;
-import com.cosmos.wibet.services.model.enums.ProfilEnum;
-import com.cosmos.wibet.services.model.User;
-import com.cosmos.wibet.services.rest.model.UserRest;
+import com.cosmos.wibet.domain.model.enums.ProfilEnum;
+import com.cosmos.wibet.domain.model.User;
+import com.cosmos.wibet.rest.model.UserRest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
@@ -27,7 +27,6 @@ public class UserServiceImpl implements UserService{
         user.setMail(userEntity.getMail());
         user.setTokens(userEntity.getTokens());
         user.setProfilEnum(Objects.isNull(userEntity.getProfil()) ? null : ProfilEnum.fromCode(userEntity.getProfil()));
-        // todo : bets
 
         return user;
     }
@@ -40,7 +39,6 @@ public class UserServiceImpl implements UserService{
         userEntity.setMail(user.getMail());
         userEntity.setTokens(user.getTokens());
         userEntity.setProfil(user.getProfilEnum().toString());
-        // todo : bets
 
         return userEntity;
     }
@@ -59,7 +57,6 @@ public class UserServiceImpl implements UserService{
         newUser.setId(UUID.randomUUID());
         newUser.setProfilEnum(ProfilEnum.DEFAULT);
         newUser.setTokens(0);
-        newUser.setBets(List.of());
         return userEntityToUser(userRepository.save(userToUserEntity(newUser)));
     }
 

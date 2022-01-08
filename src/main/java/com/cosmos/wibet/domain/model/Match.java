@@ -1,10 +1,10 @@
-package com.cosmos.wibet.services.model;
+package com.cosmos.wibet.domain.model;
 
+import com.cosmos.wibet.domain.model.enums.StateEnum;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -16,6 +16,7 @@ public class Match {
     private LocalDate dateCreation;
     private LocalDateTime playDate;
     private LocalDateTime endDate;
-    private List<Team> teams;
-    private List<Pool> pools;
+    private String teamOne;
+    private String teamTwo;
+    private StateEnum state;
 }

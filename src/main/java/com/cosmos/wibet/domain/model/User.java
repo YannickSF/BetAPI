@@ -1,9 +1,8 @@
-package com.cosmos.wibet.services.model;
+package com.cosmos.wibet.domain.model;
 
-import com.cosmos.wibet.services.model.enums.ProfilEnum;
+import com.cosmos.wibet.domain.model.enums.ProfilEnum;
 import lombok.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -15,7 +14,6 @@ public class User {
     private String password;
     private String mail;
     private Integer tokens;
-    private List<Bet> bets;
     private ProfilEnum profilEnum;
 
 }

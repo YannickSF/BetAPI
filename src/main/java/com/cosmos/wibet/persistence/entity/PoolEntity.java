@@ -22,12 +22,12 @@ public class PoolEntity {
     @Column(name = "cote")
     private Integer cote;
 
-    @Column(name = "bets")
-    private String bets;
-
     @Column(name = "`result`")
     private String result;
 
     @Column(name = "state")
     private String state ;
+
+    @Column(name = "match_id")
+    private String matchId ;
 }

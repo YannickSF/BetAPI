@@ -1,4 +1,4 @@
-package com.cosmos.wibet.services.model.enums;
+package com.cosmos.wibet.domain.model.enums;
 
 import lombok.NoArgsConstructor;
 

@@ -1,7 +1,7 @@
-package com.cosmos.wibet.services.domain;
+package com.cosmos.wibet.domain.services;
 
-import com.cosmos.wibet.services.model.User;
-import com.cosmos.wibet.services.rest.model.UserRest;
+import com.cosmos.wibet.domain.model.User;
+import com.cosmos.wibet.rest.model.UserRest;
 
 import java.util.List;
 

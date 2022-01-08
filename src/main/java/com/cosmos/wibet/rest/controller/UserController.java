@@ -1,8 +1,8 @@
-package com.cosmos.wibet.services.rest.controller;
+package com.cosmos.wibet.rest.controller;
 
-import com.cosmos.wibet.services.domain.UserService;
-import com.cosmos.wibet.services.model.User;
-import com.cosmos.wibet.services.rest.model.UserRest;
+import com.cosmos.wibet.domain.services.UserService;
+import com.cosmos.wibet.domain.model.User;
+import com.cosmos.wibet.rest.model.UserRest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

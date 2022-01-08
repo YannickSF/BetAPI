@@ -1,9 +1,9 @@
-package com.cosmos.wibet.services.domain;
+package com.cosmos.wibet.domain.services;
 
 import com.cosmos.wibet.persistence.entity.BetEntity;
 import com.cosmos.wibet.persistence.repository.BetRepository;
-import com.cosmos.wibet.services.model.Bet;
-import com.cosmos.wibet.services.rest.model.BetRest;
+import com.cosmos.wibet.domain.model.Bet;
+import com.cosmos.wibet.rest.model.BetRest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class BetServiceImpl implements BetService{
+public class BetServiceImpl implements BetService {
 
     @Autowired
     private BetRepository betRepository;
@@ -58,13 +58,23 @@ public class BetServiceImpl implements BetService{
     }
 
     @Override
+    public List<Bet> findBetByPoolId(String poolId) {
+        return betRepository.findByPoolId(poolId);
+    }
+
+    @Override
+    public List<Bet> findBetsByUserId(String userId) {
+        return betRepository.findByUserId(userId);
+    }
+
+    @Override
     public List<Bet> getBets() {
         List<BetEntity> betEntities = (List<BetEntity>) betRepository.findAll();
         return betEntities.stream().map(this::betEntityToBet).collect(Collectors.toList());
     }
 
     @Override
-    public Bet updateBet(BetRest updateBet) {
+    public Bet updateBet(String betId, BetRest updateBet) {
         return null;
     }
 

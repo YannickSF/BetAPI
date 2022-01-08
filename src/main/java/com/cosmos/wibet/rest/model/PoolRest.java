@@ -1,4 +1,4 @@
-package com.cosmos.wibet.services.rest.model;
+package com.cosmos.wibet.rest.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class PoolRest {
+
+    private String matchId;
     private String title;
     private Integer cote;
 }

@@ -1,4 +1,4 @@
-package com.cosmos.wibet.services.rest.model;
+package com.cosmos.wibet.rest.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

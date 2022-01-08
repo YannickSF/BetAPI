@@ -28,9 +28,12 @@ public class MatchEntity {
     @Column(name = "end_date")
     private String endDate;
 
-    @Column(name = "teams")
-    private String teams;
+    @Column(name = "team_one")
+    private String teamOne;
 
-    @Column(name = "bets")
-    private String bets;
+    @Column(name = "team_two")
+    private String teamTwo;
+
+    @Column(name = "state")
+    private String state;
 }

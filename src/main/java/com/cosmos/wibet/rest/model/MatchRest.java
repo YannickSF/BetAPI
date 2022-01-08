@@ -1,4 +1,4 @@
-package com.cosmos.wibet.services.rest.model;
+package com.cosmos.wibet.rest.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,4 +10,6 @@ public class MatchRest {
     private String title;
     private String playDate;
     private String endDate;
+    private String teamOne;
+    private String teamTwo;
 }

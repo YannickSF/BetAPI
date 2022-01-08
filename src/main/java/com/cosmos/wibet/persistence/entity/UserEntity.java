@@ -28,9 +28,6 @@ public class UserEntity {
     @Column(name = "tokens")
     private Integer tokens;
 
-    @Column(name = "bet")
-    private String bets;
-
     @Column(name = "profil")
     private String profil;
 }
